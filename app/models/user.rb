@@ -15,10 +15,10 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
-  # after_create :send_welcome_mail
-  #   def send_welcome_mail
-  #     UserNotifierMailer.send_signup_email(self).deliver
-  #   end
+  after_create :send_welcome_mail
+    def send_welcome_mail
+      UserNotifierMailer.send_signup_email(self).deliver
+    end
 
   # 自分がフォローされる（被フォロー）側の関係性
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
