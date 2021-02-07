@@ -7,6 +7,11 @@ class User < ApplicationRecord
   has_many :books
   attachment :profile_image, destroy: false
 
+  # chat system
+  has_many :user_rooms
+  has_many :chats
+  has_many :rooms, through: :user_rooms
+
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
